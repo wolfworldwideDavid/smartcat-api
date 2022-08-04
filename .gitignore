@@ -1,0 +1,11 @@
+~*
+.DS_Store
+*.local.*
+
+/.ssh
+/data
+/db
+/ts
+/.ash_history
+/.initialized
+/serge-import-report-*.html

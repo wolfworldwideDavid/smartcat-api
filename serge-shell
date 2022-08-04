@@ -1,0 +1,18 @@
+#!/bin/bash
+
+DIR=$(perl -e "use Cwd qw(abs_path); use File::Basename; print dirname(abs_path('$0'))")
+
+PARAMS="--entrypoint /usr/local/bin/boot/run-command"
+if [ $# -eq 0 ]; then
+    echo "No arguments provided, will run an interactive shell"
+    echo "Mounting $DIR as /root"
+    PARAMS="-it --entrypoint /usr/local/bin/boot/run-shell"
+fi
+
+docker run \
+    --rm \
+    -v "$DIR:/root" \
+    $PARAMS \
+    --env PS1="\[\033[01;35m\][Serge Shell]\[\033[00m\] \w \$ " \
+    smartcatcom/serge:v2 \
+    "$@"
